@@ -1,13 +1,24 @@
 import { Link } from 'react-router-dom';
 import '../style/common.css'
-import { handleLogoutProcess } from '../actions/authedUser';
+import { handleLogoutProcess, hanldeLoginProcess } from '../actions/authedUser';
 import { connect } from 'react-redux';
+import { useState } from 'react';
 
-const Navigation = ({dispatch, authedUserId, userImage}) => {
-    const handleLogout = (e) => {
+const Navigation = ({ dispatch, userImage, users }) => {
+
+    const [imgUrl, setImgUrl] = useState(userImage);
+
+    const handleChangeUser = (e) => {
         e.preventDefault();
-        dispatch(handleLogoutProcess());
-    };
+        if (e.target.value === "logout") {
+            dispatch(handleLogoutProcess());
+        } else {
+            const user = Object.values(users).find((user) => user.id === e.target.value);
+            setImgUrl(user.avatarURL)
+            dispatch(hanldeLoginProcess(user.id, user.password));
+        }
+
+    }
 
     return (
         <div>
@@ -18,16 +29,22 @@ const Navigation = ({dispatch, authedUserId, userImage}) => {
                     <Link to="/add">New</Link>
                 </div>
                 <div className="user-block">
-                    <img src={userImage} alt='UserImage'/>
-                    <span>{authedUserId}</span>
-                    <button onClick={handleLogout}>Logout</button>
+                    <img src={imgUrl} alt='UserImage' />
+                    <select onChange={handleChangeUser}>
+                        {Object.values(users).map((user) => (
+                            <option key={user.id} value={user.id}>
+                                {user.id}
+                            </option>))
+                        }
+                        <option value="logout">Logout</option>
+                    </select>
                 </div>
             </nav>
         </div>
     );
 }
-const mapStateToProps = ({authedUser}) => ({
-    authedUserId: authedUser.id,
-    userImage: authedUser.avatarURL
+const mapStateToProps = ({ authedUser, users }) => ({
+    userImage: authedUser.avatarURL,
+    users
 });
 export default connect(mapStateToProps)(Navigation);

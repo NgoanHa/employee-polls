@@ -16,8 +16,10 @@ a {
     float: right;
 }
 
-.user-block span {
-    padding: 0px 5px 0px 6px;
+.user-block select {
+    margin: 0px 5px 0px 6px;
+    border-radius: 5px;
+    height: 25px;
 }
 
 .nav-block {
@@ -143,4 +145,8 @@ img {
 
 .dashboard-option-one, .dashboard-option-two {
     border-bottom: solid 1px;   
+}
+
+.home-rdo-group {
+    margin-top: 20px;
 }

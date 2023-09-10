@@ -1,14 +1,16 @@
 import { connect } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { handleAddAnswer } from "../actions/questions";
 
-const Dashboard = ({ dispatch, authedUser, question, author }) => {
+const Dashboard = ({ dispatch, authedUser, questions, users }) => {
 
-    const navigate = useNavigate();
+    var questionId = useParams().id;
+    const question = Object.values(questions).find((question) => question.id === questionId);
+    const author = Object.values(users).find((user) => user.id === question.author);
 
     if (!authedUser || !question || !author) {
         return <Navigate to="/404" />;
-    }
+     }
 
     const optionOneIsVoted = question.optionOne.votes.includes(authedUser.id);
     const optionTwoIsVoted = question.optionTwo.votes.includes(authedUser.id);
@@ -17,13 +19,11 @@ const Dashboard = ({ dispatch, authedUser, question, author }) => {
     const handleSelectOptionOne = (e) => {
         e.preventDefault();
         dispatch(handleAddAnswer(question.id, "optionOne"));
-        navigate("/");
     };
 
     const handleSelectOptionTwo = (e) => {
         e.preventDefault();
         dispatch(handleAddAnswer(question.id, "optionTwo"));
-        navigate("/");
     };
 
     const calcPercent = (option, question) => {
@@ -82,15 +82,4 @@ const Dashboard = ({ dispatch, authedUser, question, author }) => {
         </div>
     );
 }
-
-const mapStateToProps = ({ authedUser, users, questions }) => {
-    try {
-        const question = Object.values(questions).find((question) => question.id === useParams().id);
-        const author = Object.values(users).find((user) => user.id === question.author);
-        return { authedUser, question, author };
-    } catch (ex) {
-        return <Navigate to="/404" />;
-    }
-};
-
-export default connect(mapStateToProps)(Dashboard);
+export default connect()(Dashboard);

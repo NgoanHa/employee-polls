@@ -3,7 +3,7 @@ import '../style/common.css'
 
 const LeaderBoard = ({ users }) => {
 
-    const sortedListUser = Object.values(users).sort((x, y) => Object.keys(y.answers).length - Object.keys(x.answers).length);
+    const sortedListUser = Object.values(users).sort((x, y) => (Object.keys(y.answers).length + y.questions.length) - (Object.keys(x.answers).length + x.questions.length));
 
     return (
         <div className="leaderboard-container">
