@@ -7,6 +7,7 @@ import { useState } from 'react';
 const Navigation = ({ dispatch, userImage, users }) => {
 
     const [imgUrl, setImgUrl] = useState(userImage);
+    const [activeColor, setActiveColor] = useState("#5fe4d4");
 
     const handleChangeUser = (e) => {
         e.preventDefault();
@@ -14,10 +15,10 @@ const Navigation = ({ dispatch, userImage, users }) => {
             dispatch(handleLogoutProcess());
         } else {
             const user = Object.values(users).find((user) => user.id === e.target.value);
-            setImgUrl(user.avatarURL)
+            setImgUrl(user.avatarURL);
+            setActiveColor(user.voteStyle);
             dispatch(hanldeLoginProcess(user.id, user.password));
         }
-
     }
 
     return (
@@ -30,13 +31,13 @@ const Navigation = ({ dispatch, userImage, users }) => {
                 </div>
                 <div className="user-block">
                     <img src={imgUrl} alt='UserImage' />
-                    <select onChange={handleChangeUser}>
-                        {Object.values(users).map((user) => (
-                            <option key={user.id} value={user.id}>
-                                {user.id}
-                            </option>))
-                        }
-                        <option value="logout">Logout</option>
+                    <select style={{backgroundColor: activeColor}} id="user-dropdown" onChange={handleChangeUser}>
+                            {Object.values(users).map((user) => (
+                                <option key={user.id} value={user.id}>
+                                    {user.id}
+                                </option>))
+                            }
+                            <option value="logout">Logout</option>
                     </select>
                 </div>
             </nav>

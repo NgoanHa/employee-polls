@@ -18,7 +18,7 @@ export const hanldeLoginProcess = (username, password) => {
     return (dispatch, getState) => {
         const { users } = getState();
         const user = Object.values(users).find((user) => user.id === username && user.password === password);
-        if(!!user){
+        if (!!user) {
             return dispatch(setAuthenticationUser(user));
         }
     }

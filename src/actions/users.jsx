@@ -23,5 +23,5 @@ export const addQuestionOfUser = (authedUser, id) => {
         type: ADD_QUESTION_USER,
         authedUser,
         qid: id,
-    }   
+    }
 }

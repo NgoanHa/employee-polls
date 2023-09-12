@@ -2,6 +2,7 @@ let users = {
   sarahedo: {
     id: 'sarahedo',
     password:'sarahedo123',
+    voteStyle: '#5fe4d4',
     name: 'Sarah Edo',
     avatarURL: '../images/sarahedo.png',
     answers: {
@@ -15,6 +16,7 @@ let users = {
   tylermcginnis: {
     id: 'tylermcginnis',
     password:'tylermcginnis123',
+    voteStyle: '#fe9526',
     name: 'Tyler McGinnis',
     avatarURL: '../images/tylermcginnis.png',
     answers: {
@@ -26,6 +28,7 @@ let users = {
   johndoe: {
     id: 'johndoe',
     password:'johndoe123',
+    voteStyle: '#e9573e',
     name: 'John Doe',
     avatarURL: '../images/johndoe.png',
     answers: {

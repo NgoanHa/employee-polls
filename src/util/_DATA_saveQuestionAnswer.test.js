@@ -1,4 +1,4 @@
-import { _saveQuestionAnswer} from "./_DATA";
+import { _saveQuestionAnswer } from "./_DATA";
 
 describe("_saveQuestionAnswer", () => {
     it("correct parameters is passed", async () => {

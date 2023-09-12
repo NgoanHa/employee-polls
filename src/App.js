@@ -31,7 +31,7 @@ const App = ({ dispatch, logInState, authedUser, questions, users }) => {
         <Route exact path="/" element={handleAuthenticationUser(<Home />)} />
         <Route exact path="/leaderboard" element={handleAuthenticationUser(<LeaderBoard />)} />
         <Route exact path="/add" element={handleAuthenticationUser(<NewPoll />)} />
-        <Route exact path="/questions/:id" element={handleAuthenticationUser(<Dashboard authedUser={authedUser} questions={questions} users={users}/>)} />
+        <Route exact path="/questions/:id" element={handleAuthenticationUser(<Dashboard authedUser={authedUser} questions={questions} users={users} />)} />
         <Route exact path="/404" element={handleAuthenticationUser(<PageNotFound />)} />
       </Routes>
     </div>

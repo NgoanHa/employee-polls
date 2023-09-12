@@ -10,7 +10,7 @@ const Dashboard = ({ dispatch, authedUser, questions, users }) => {
 
     if (!authedUser || !question || !author) {
         return <Navigate to="/404" />;
-     }
+    }
 
     const optionOneIsVoted = question.optionOne.votes.includes(authedUser.id);
     const optionTwoIsVoted = question.optionTwo.votes.includes(authedUser.id);
@@ -52,7 +52,7 @@ const Dashboard = ({ dispatch, authedUser, questions, users }) => {
                     <div className="dashboard-option-one">
                         <p>{question.optionOne.text}</p>
                     </div>
-                    <button onClick={handleSelectOptionOne} disabled={isVoted}>
+                    <button className="dashboard-votes-btn" onClick={handleSelectOptionOne} disabled={isVoted}>
                         <div>
 
                             {!isVoted &&
@@ -68,7 +68,7 @@ const Dashboard = ({ dispatch, authedUser, questions, users }) => {
                     <div className="dashboard-option-two">
                         <p >{question.optionTwo.text}</p>
                     </div>
-                    <button onClick={handleSelectOptionTwo} disabled={isVoted}>
+                    <button className="dashboard-votes-btn" onClick={handleSelectOptionTwo} disabled={isVoted}>
 
                         {!isVoted &&
                             <p>Click</p>
